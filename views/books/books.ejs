@@ -1,0 +1,47 @@
+<!--============================================-->
+<!-- Name: books.ejs                            -->
+<!-- Description: Books collection view page    -->
+<!-- Author: JeyzerMC                           -->
+<!-- Date:   August 1st, 2017                    -->
+<!--============================================-->
+
+<% include ../partials/header %>
+
+    <div class="ui container">
+        <h1>THIS IS THE BOOKS COLLECTION</h1>
+
+
+        <!--<div class="ui secondary menu">
+            <a class="active item" data-tab="jey">Jeyzer's Collection</a>
+            <a class="item" data-tab="request">General Collection</a>
+            <a class="item" data-tab="general">Requests</a>
+        </div>
+        <div class="ui active tab segment" data-tab="jey">
+            <p>Salut c'est Jeyzer!</p>
+        </div>
+        <div class="ui tab segment" data-tab="general">
+            <p>Salut c'est Random!</p>
+        </div>
+        <div class="ui tab segment" data-tab="request">
+            <p>Salut c'est Request!</p>
+        </div>-->
+        <div class="ui three column grid">
+            <% books.forEach(function(book){ %>
+              <div class="column">
+                <div class="ui clearing segment">
+                    <img class="ui small left floated rounded image" src="<%= book.image %>">
+                    <h1> <%= book.name %></h1>
+                    <h3> $<%= book.price %></h3>
+                    <h3> <%= book.availability %></h3>
+                </div>
+            </div>
+            <% }); %>
+
+
+        </div>
+
+
+    </div>
+
+
+    <% include ../partials/footer %>
