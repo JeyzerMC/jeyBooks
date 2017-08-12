@@ -11,8 +11,9 @@ var router = require("express").Router({
     User = require("../models/userModel"),
     passport = require("passport");
 
+
 router.get("/register", function (req, res) {
-    res.render("auth/register.ejs");
+    res.render("auth/register");
 });
 
 router.post("/register", function (req, res) {
@@ -34,12 +35,20 @@ router.post("/register", function (req, res) {
 
 
 router.get("/login", function (req, res) {
-    res.render("auth/login.ejs");
+    res.render("auth/login");
+});
+
+router.post("/login", passport.authenticate("local", {
+    failureRedirect: "/login"
+    //FAILURE FLASH TO DO HERE
+}), function (req, res) {
+    //SUCCESS FLASH TO DO HERE
+    res.redirect("/books");
 });
 
 
 router.get("/logout", function (req, res) {
-    res.render("auth/logout.ejs");
+    res.render("auth/logout");
 });
 
 module.exports = router;

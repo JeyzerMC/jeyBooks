@@ -74,7 +74,11 @@ var mainRoutes = require("./routes/main"),
     bookRoutes = require("./routes/books"),
     authRoutes = require("./routes/auth");
 
-// ROUTES PARAM MISSING (currentUser for middleware)
+app.use(function(req, res, next){
+    req.locals.currentUser = req.user;
+    req.locals.errorMessage = req.flash("error");
+    req.locals.successMessage = req.flash("success");
+});
 
 app.use(mainRoutes);
 app.use("/books", bookRoutes);
