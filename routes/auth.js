@@ -22,7 +22,7 @@ router.post("/register", function (req, res) {
         }), req.body.password,
         function (err, newUser) {
             if (err) {
-                console.log(err);
+                req.flash("error", err.name);
                 return res.redirect("register");
             }
 
@@ -38,9 +38,9 @@ router.get("/login", function (req, res) {
     res.render("auth/login");
 });
 
-router.post("/login", passport.authenticate("local", {
-    failureRedirect: "/login"
-    //FAILURE FLASH TO DO HERE
+router.post("/login", passport.authenticate("loginStrat", {
+    failureRedirect: "/login",
+    failureFlash: true
 }), function (req, res) {
     //SUCCESS FLASH TO DO HERE
     res.redirect("/books");
