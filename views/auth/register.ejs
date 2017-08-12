@@ -1,0 +1,27 @@
+<!--============================================-->
+<!-- Name: register.ejs                         -->
+<!-- Description: Register page view            -->
+<!-- Author: JeyzerMC                           -->
+<!-- Date:   August 11th, 2017                  -->
+<!--============================================-->
+
+<% include ../partials/header %>
+
+<div class="ui container form">
+    <h1 style="text-align: center">Register!</h1>
+    
+    <form class="ui form" action="/register" method="POST">
+        <div class="field">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Username"></input>
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password"></input>
+        </div>
+        <button class="ui button fluid" type="submit">Submit</button>
+    </form>
+</div>
+
+
+<% include ../partials/footer %>

@@ -30,9 +30,11 @@
               <div class="column">
                 <div class="ui clearing segment">
                     <img class="ui small left floated rounded image" src="<%= book.image %>">
-                    <h1> <%= book.name %></h1>
-                    <h3> $<%= book.price %></h3>
-                    <h3> <%= book.availability %></h3>
+                    <div class="informations">
+                        <h1> <%= book.name %></h1>
+                        <h3> $<%= book.price %></h3>
+                        <h3> <%= book.availability %></h3>
+                    </div>
                 </div>
             </div>
             <% }); %>

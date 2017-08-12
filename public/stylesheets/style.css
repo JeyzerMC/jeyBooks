@@ -2,4 +2,22 @@
     margin-top: 50px;
 }
 
+.ui.clearing.segment {
+    padding: 0;
+}
 
+.ui.clearing.segment img {
+    margin-bottom: 0;
+    height: 220px;
+}
+
+.ui.container.form {
+    width: 30%;
+}
+
+.ui.button {
+    width: 40%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}

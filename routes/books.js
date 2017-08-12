@@ -13,7 +13,7 @@ var router = require("express").Router({
 
 router.get("/", function (req, res) {
     Books.find({}, function (err, bookData) {
-        res.render("../views/books/books", {
+        res.render("books/books", {
             books: bookData
         });
     });

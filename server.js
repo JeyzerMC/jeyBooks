@@ -22,36 +22,27 @@ var express        = require("express"),
 // Importing and creating the models
 //========================================
 
-
-// MODELS CODE HERE
 var BookModel = require("./models/bookModel"),
-    UserModel = require("./models/userModel");
+    User = require("./models/userModel");
 
 //========================================
-// Calling and configuring up the routes
+// General node_modules configuration 
 //========================================
 
-
-// ROUTES HERE
-var mainRoutes = require("./routes/main"),
-    bookRoutes = require("./routes/books");
-
-// ROUTES PARAM 
-
-// ROUTES ASSOCIATION
-app.use(mainRoutes);
-app.use("/books", bookRoutes);
+app.use(methodOverride("_method"));
+app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/semantic"));
 
 //========================================
 // Connection the database with mongoose
 //========================================
 
-
 var url = process.env.DATABASEURL || "mongodb://localhost/jey_books"; 
 mongoose.connect(url,{
   useMongoClient: true,
 });
-
 
 //========================================
 // Configuring Express, Session and Flash
@@ -71,19 +62,23 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(UserModel.authenticate()));
-passport.serializeUser(UserModel.serializeUser());
-passport.deserializeUser(UserModel.deserializeUser());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //========================================
-// General node_modules configuration 
+// Calling and configuring up the routes
 //========================================
 
-app.use(methodOverride("_method"));
-app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/semantic"));
+var mainRoutes = require("./routes/main"),
+    bookRoutes = require("./routes/books"),
+    authRoutes = require("./routes/auth");
+
+// ROUTES PARAM MISSING (currentUser for middleware)
+
+app.use(mainRoutes);
+app.use("/books", bookRoutes);
+app.use(authRoutes);
 
 //========================================
 // Database seeder for dummy test phases
@@ -91,11 +86,12 @@ app.use(express.static(__dirname + "/semantic"));
 
 var seedDB = require("./public/seedDB");
 
-seedDB(); // Seed the Database with dummy data
+seedDB(); // Add dummy test data
 
 //========================================
-// Port and server start configuration 
+// Port and server start configuration
 //========================================
+
 var port = process.env.PORT || 8080;  // Deployment || Local tests
 
 app.listen(port, process.env.IP, function(){
