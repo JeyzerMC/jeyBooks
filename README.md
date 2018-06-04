@@ -1,1 +1,1 @@
-HELLO WORLD!
+Book selling app for learning purposes

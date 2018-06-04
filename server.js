@@ -58,7 +58,7 @@ mongoose.connect(url, {
 //========================================
 
 app.use(require("express-session")({
-    secret: "El Psy Congroo",
+    secret: "KEY",
     resave: false,
     saveUninitialized: false
 }));
